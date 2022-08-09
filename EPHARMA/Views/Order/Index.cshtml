@@ -1,0 +1,161 @@
+﻿@model IEnumerable<EPHARMA.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-content">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <h4 class="card-title">Order</h4>
+            <a asp-action="Create">
+                <button class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:700px">
+                    <i class="bx bx-plus"></i>&nbsp; Add new Order
+                </button>
+            </a>
+        </div>
+        <div class="content-body">
+            <div class="users-list-table">
+                <div class="card">
+                    <div class="card-body">
+                        @*<div class="card-header">
+                                <h4 class="card-title">City Details</h4>
+                                <a asp-action="Create">
+                                    <button id="addRow" class="btn btn-primary mb-2 d-flex align-items-center">
+                                        <i class="bx bx-plus"></i>&nbsp; Add new City
+                                    </button>
+                                </a>
+                            </div>*@
+                        <div class="table-responsive">
+                            <table class="table zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PharmacyId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CustomerId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Location)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderAddress)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderLatitude)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderLongitude)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderStatus)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsFinished)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Remarks)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderDateTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.SubTotal)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TotalBill)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EndTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.RecievingTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.SpecialInstructions)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TotalQuantity)
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PharmacyId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Location)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderLatitude)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderLongitude)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderStatus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFinished)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Remarks)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderDateTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SubTotal)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TotalBill)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RecievingTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SpecialInstructions)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TotalQuantity)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Create" asp-route-id="@item.OrderId"><i class='bx bxs-eyedropper' style="height:25px;width:25px;color:#7367f0"></i></a> |
+                                            <a href="#" onclick="DeleteRecord(@item.OrderId, '/Order/Delete')"><i class="Danger bx bx-trash-alt" style="height:25px;width:25px;color:#ea5455"></i></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<EPHARMA.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-content">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <h4 class="card-title">Appointment</h4>
+            <a asp-action="Create">
+                <button class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:600px">
+                    <i class="bx bx-plus"></i>&nbsp; Add new Appointment
+                </button>
+            </a>
+        </div>
+        <div class="content-body">
+            <div class="users-list-table">
+                <div class="card">
+                    <div class="card-body">
+                        @*<div class="card-header">
+                                <h4 class="card-title">City Details</h4>
+                                <a asp-action="Create">
+                                    <button id="addRow" class="btn btn-primary mb-2 d-flex align-items-center">
+                                        <i class="bx bx-plus"></i>&nbsp; Add new City
+                                    </button>
+                                </a>
+                            </div>*@
+                        <div class="table-responsive">
+                            <table class="table zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AppointmentCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Doctors)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AppointmentStatus)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.StartTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EndTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NumberOfSlots)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsFinished)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AppointmentDate)
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AppointmentCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Doctors.DoctorName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AppointmentStatus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NumberOfSlots)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFinished)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AppointmentDate)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Create" asp-route-id="@item.AppointmentId"><i data-feather='edit' style="height:25px;width:25px;color:#7367f0"></i></a> |
+                                            <a href="#" onclick="DeleteRecord(@item.AppointmentId, '/Appointment/Delete')"><i data-feather='trash-2' class="Danger" style="height:25px;width:25px;color:#ea5455"></i></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

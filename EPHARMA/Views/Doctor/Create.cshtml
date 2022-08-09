@@ -1,0 +1,183 @@
+﻿@model EPHARMA.Models.Doctor
+
+@{
+    ViewData["Title"] = "Create";
+}
+<form asp-action="Create" enctype="multipart/form-data" class="form form-vertical">
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">@(Model.DoctorId ==0 ? "Create Doctor" : "Edit Doctor")</h2>
+                    </div>
+                    <div class="card-body">
+                        <input type="hidden" asp-for="DoctorId" />
+
+                        <input type="hidden" asp-for="Date" />
+                        <input type="hidden" asp-for="OnlineStatus" />
+                        <input type="hidden" asp-for="Status" />
+                        @if (Model.DoctorId != 0)
+                        {
+                            <input type="hidden" asp-for="Password" />
+                            <input type="hidden" asp-for="DoctorEmail" />
+                            <input type="hidden" asp-for="ProfilePhoto" />
+                        }
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-12">
+                                    <div class="row clearfix">
+                                        <div class="col-sm-6">
+                                            <fieldset class="form-group">
+
+                                                <label asp-for="ProfilePhoto">Profile Photo<br /> <small>please upload an image with height and width greater than 100</small> </label>
+                                                <div class="custom-file">
+                                                    <input name="ProfilePhoto" type="file" onchange="document.getElementById('showProfileImageId').src = window.URL.createObjectURL(this.files[0]);" class="custom-file-input" id="inputGroupFile01" />
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                </div>
+
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @if (Model.ProfilePhoto == null)
+                                            {
+                                                <img src="~/Images/ChooseImage.jpg" id="showProfileImageId" class="float-right" style="width:240px; height:150px;" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Images/@Model.ProfilePhoto" id="showCoverImageId" class="float-right" style="width:240px; height:150px;" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="DoctorName" class="control-label">Doctor Name</label>
+                                        <input asp-for="DoctorName" class="form-control" required />
+                                        <span asp-validation-for="DoctorName" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                @if (Model.DoctorId == 0)
+                                {
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="DoctorEmail" class="control-label">Doctor Email</label>
+                                            <input asp-for="DoctorEmail" class="form-control" required />
+                                            <span asp-validation-for="DoctorEmail" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="Password" class="control-label"></label>
+                                            <input asp-for="Password" type="password" class="form-control" required />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                                        <input asp-for="PhoneNumber" class="form-control" required />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ConsultancyCharges" class="control-label">Consultancy Charges</label>
+                                        <input asp-for="ConsultancyCharges" class="form-control" required />
+                                        <span asp-validation-for="ConsultancyCharges" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="CNIC" class="control-label"></label>
+                                        <input asp-for="CNIC" class="form-control" required />
+                                        <span asp-validation-for="CNIC" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="YearsOfExperience" class="control-label">Years Of Experience</label>
+                                        <input asp-for="YearsOfExperience" class="form-control" required />
+                                        <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="CategoryId" class="control-label">Category</label>
+                                        <select asp-for="CategoryId" class="form-control">
+                                            <option value="0">Please select a category</option>
+                                            @foreach (var item in ViewBag.CategoryId)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label asp-for="Services" class="control-label">Service Description</label>
+                                        <textarea rows="3" asp-for="Services" class="form-control" required></textarea>
+                                        <span asp-validation-for="Services" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="control-label">Overview</label>
+                                        <textarea rows="3" asp-for="Description" class="form-control" required></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label asp-for="Education" class="control-label">Education</label>
+                                        <textarea rows="3" asp-for="Education" class="form-control" required></textarea>
+                                        <span asp-validation-for="Education" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                @*Profile Pic*@
+
+                                @* <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="Overview" class="control-label"></label>
+                        <input asp-for="Overview" required class="form-control" />
+                        <span asp-validation-for="Overview" class="text-danger"></span>
+                    </div>
+                </div>*@
+
+                                <div class="col-sm-12">
+                                    <button id="SubmitButton" type="submit" class="btn btn-primary btn-round">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    function ValidatePassword() {
+        var ConfirmPassword = document.getElementById("#ConfirmPassword").value;
+        if (ConfirmPassword != $("#Password").val()) {
+            document.getElementById("#CustomValidation").innerHTML = "Password & Confirm Password doesn't match"
+            $("#SubmitButton").attr('disabled', true);
+        }
+        else {
+            document.getElementById("#CustomValidation").innerHTML = "";
+            $("#SubmitButton").attr('disabled', false);
+        }
+    }
+</script>
+

@@ -1,0 +1,251 @@
+﻿@model EPHARMA.Models.Pharmacy
+
+@{
+    ViewData["Title"] = "Create";
+}
+<form asp-action="Create" enctype="multipart/form-data" class="form form-vertical">
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">@(Model.PharmacyId ==0 ? "Create Pharmacy" : "Edit Pharmacy")</h2>
+                    </div>
+                    <div class="card-body">
+                        <input type="hidden" asp-for="PharmacyId" />
+                        <input type="hidden" asp-for="PharmacyLongitude" />
+                        <input type="hidden" asp-for="PharmacyLatitude" />
+                        <input type="hidden" asp-for="PharmacyLogo" />
+                        <input type="hidden" asp-for="CoverImage" />
+                        <input type="hidden" asp-for="Date" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row clearfix">
+                            <div class="col-12">
+                                <h3 class="card-title">Vendor</h3>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Vendors.VendorName" class="control-label"></label>
+                                    <input asp-for="Vendors.VendorName" required class="form-control" />
+                                    <span asp-validation-for="Vendors.VendorName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Vendors.VendorCNIC" class="control-label"></label>
+                                    <input asp-for="Vendors.VendorCNIC" required class="form-control" />
+                                    <span asp-validation-for="Vendors.VendorCNIC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            @if (Model.PharmacyId == 0)
+                            {
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Vendors.VendorEmail" class="control-label"></label>
+                                    <input asp-for="Vendors.VendorEmail" required class="form-control" />
+                                    <span asp-validation-for="Vendors.VendorEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Vendors.Password" class="control-label"></label>
+                                    <input asp-for="Vendors.Password" required class="form-control" />
+                                    <span asp-validation-for="Vendors.Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            }
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Vendors.VendorNumber" class="control-label"></label>
+                                    <input asp-for="Vendors.VendorNumber" required class="form-control" />
+                                    <span asp-validation-for="Vendors.VendorNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <h3 class="card-title">Pharmacy</h3>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <fieldset class="form-group">
+
+                                            <label asp-for="PharmacyLogo">Pharmacy Logo<br /> <small>please upload an image with height and width less than 100</small> </label>
+                                            <div class="custom-file">
+                                                <input name="PharmacyLogo" type="file" onchange="document.getElementById('showLogoImageId').src = window.URL.createObjectURL(this.files[0]);" class="custom-file-input" id="inputGroupFile01" />
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-sm-6" style="text-align:center">
+                                        @if (Model.PharmacyLogo == null)
+                                        {
+
+                                            <img src="~/Images/logoplaceholderimage.png" id="showLogoImageId" class="align-content-center" style="width:150px; height:150px;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Images/@Model.PharmacyLogo" id="showCoverImageId" class="align-content-center" style="width:150px; height:150px;" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <fieldset class="form-group">
+
+                                            <label asp-for="CoverImage">Cover Image<br /> <small>please upload an image with height and width greater than 300 and 100 respectively</small> </label>
+                                            <div class="custom-file">
+                                                <input name="CoverImage" type="file" onchange="document.getElementById('showCoverImageId').src = window.URL.createObjectURL(this.files[0]);" class="custom-file-input" id="inputGroupFile01" />
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-sm-6" style="text-align:center">
+                                        @if (Model.CoverImage == null)
+                                        {
+                                            <img src="~/Images/CoverImage.jpg" id="showCoverImageId" class="align-content-center" style="width:400px; height:150px;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Images/@Model.CoverImage" id="showCoverImageId" class="align-content-center" style="width:400px; height:150px;" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*Profile Pic*@
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="PharmacyName" class="control-label"></label>
+                                    <input asp-for="PharmacyName" required class="form-control" />
+                                    <span asp-validation-for="PharmacyName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" required class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Contact" class="control-label"></label>
+                                    <input asp-for="Contact" required class="form-control" />
+                                    <span asp-validation-for="Contact" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="CityId" class="control-label"></label>
+                                    <select asp-for="CityId" required class="form-control" asp-items="ViewBag.CityId">
+                                        <option value="">Select City</option>
+                                    </select>
+                                    <span asp-validation-for="CityId" class="text-danger"></span>
+                                </div>
+                            </div>
+@*                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="PharmacyLocation" class="control-label"></label>
+                                    <input asp-for="PharmacyLocation" required class="form-control" />
+                                    <span asp-validation-for="PharmacyLocation" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="PharmacyLongitude" class="control-label"></label>
+                                    <input asp-for="PharmacyLongitude" required class="form-control" />
+                                    <span asp-validation-for="PharmacyLongitude" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="PharmacyLatitude" class="control-label"></label>
+                                    <input asp-for="PharmacyLatitude" required class="form-control" />
+                                    <span asp-validation-for="PharmacyLatitude" class="text-danger"></span>
+                                </div>
+                            </div>*@
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="PharmacyAddress" class="control-label"></label>
+                                    <input asp-for="PharmacyAddress" required class="form-control" />
+                                    <span asp-validation-for="PharmacyAddress" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Overview" class="control-label"></label>
+                                    <textarea asp-for="Overview" required class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="Overview" class="text-danger"></span>
+                                </div>
+                            </div>
+                            @*@if (Model.PharmacyId == 0)
+        {
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" id="Password" class="form-control" onkeyup="ValidatePassword()" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Confirm Password</label>
+                    <input type="password" id="#ConfirmPassword" class="form-control" onkeyup="ValidatePassword()" />
+                    <span id="#CustomValidation" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <input type="hidden" asp-for="Password" />
+
+        }*@
+                            <div class="col-sm-12">
+                                <button id="SubmitButton" type="submit" class="btn btn-primary btn-round">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    function ValidatePassword() {
+        var ConfirmPassword = document.getElementById("#ConfirmPassword").value;
+        if (ConfirmPassword != $("#Password").val()) {
+            document.getElementById("#CustomValidation").innerHTML = "Password & Confirm Password doesn't match"
+            $("#SubmitButton").attr('disabled', true);
+        }
+        else {
+            document.getElementById("#CustomValidation").innerHTML = "";
+            $("#SubmitButton").attr('disabled', false);
+        }
+    }
+</script>

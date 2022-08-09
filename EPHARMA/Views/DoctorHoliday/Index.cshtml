@@ -1,0 +1,77 @@
+﻿@model IEnumerable<EPHARMA.Models.DoctorHoliday>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-content">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <h4 class="card-title">Doctor Holiday</h4>
+            <a asp-action="Create">
+                <button class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:650px">
+                    <i class="bx bx-plus"></i>&nbsp; Add Doctor Holiday
+                </button>
+            </a>
+        </div>
+        <div class="content-body">
+            <div class="users-list-table">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.DoctorId)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.HolidayDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.StartTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EndTime)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsFullDay)
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DoctorId)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HolidayDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndTime)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFullDay)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Create" asp-route-id="@item.DoctorHolidayId"><i class='bx bxs-eyedropper' style="height:25px;width:25px;color:#7367f0"></i></a> |
+                                            <a href="#" onclick="DeleteRecord(@item.DoctorHolidayId, '/DoctorHoliday/Delete')"><i class="Danger bx bx-trash-alt" style="height:25px;width:25px;color:#ea5455"></i></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

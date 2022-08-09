@@ -1,0 +1,60 @@
+﻿@model EPHARMA.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section id="multiple-column-form">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">@(Model.CategoryId ==0 ? "Create Category" : "Edit Category")</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="CategoryId" />
+                        <div class="row clearfix">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="CategoryTitle" class="control-label">Category Title</label>
+                                    <input asp-for="CategoryTitle" class="form-control" />
+                                    <span asp-validation-for="CategoryTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <label asp-for="CategoryType" class="control-label">Category Type</label>
+                        <span asp-validation-for="CategoryType" class="text-danger"></span>
+                        <br />
+                        <div class="row clearfix">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3 custom-radio" style="margin-left:1.5%;">
+                                <input type="radio" value="Medicine" asp-for="CategoryType" id="customRadio1" class="custom-control-input" />
+                                <label class="custom-control-label" style="padding-left: inherit;" for="customRadio1">Medicine</label>
+                            </div>
+                            <div class="col-sm-3 custom-radio">
+                                <input type="radio" value="Doctor" asp-for="CategoryType" id="customRadio2" class="custom-control-input" />
+                                <label class="custom-control-label" style="padding-left: inherit;" for="customRadio2">Doctor</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-sm-12 ">
+                            <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*<div>
+    <a asp-action="Index">Back to List</a>
+    </div>*@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

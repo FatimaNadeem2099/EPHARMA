@@ -1,0 +1,102 @@
+﻿@model IEnumerable<EPHARMA.Models.Medicine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="app-content">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <h4 class="card-title">Medicine</h4>
+            <a asp-action="Create">
+                <button class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:700px">
+                    <i class="bx bx-plus"></i>&nbsp; Add new Medicine
+                </button>
+            </a>
+        </div>
+        <div class="content-body">
+            <div class="users-list-table">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MedicineName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PharmacyId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.KeyBenefits)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Precautions)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MedicinePrice)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MedicineImage)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MedicineDescription)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MedicineIngredients)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Quantity)
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MedicineName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PharmacyId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.KeyBenefits)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Precautions)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MedicinePrice)
+                                        </td>
+                                        <td>
+                                            <img src="~/images/@item.MedicineImage"
+                                                 class="rounded-lg"
+                                                 height="50" width="50"
+                                                 asp-append-version="true" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MedicineDescription)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MedicineIngredients)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Create" asp-route-id="@item.MedicineId"><i class='bx bxs-eyedropper' style="height:25px;width:25px;color:#7367f0"></i></a> |
+                                            <a href="#" onclick="DeleteRecord(@item.MedicineId, '/Medicine/Delete')"><i class="Danger bx bx-trash-alt" style="height:25px;width:25px;color:#ea5455"></i></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

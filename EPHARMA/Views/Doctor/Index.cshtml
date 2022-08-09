@@ -1,0 +1,193 @@
+﻿@model IEnumerable<EPHARMA.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<body class="horizontal-layout horizontal-menu navbar-static 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
+*@
+    <div class="app-content">
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <h4 class="card-title">Doctor</h4>
+                <a asp-action="Create">
+                    <button class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:700px">
+                        <i class="bx bx-plus"></i>&nbsp; Add new Doctor
+                    </button>
+                </a>
+            </div>
+            <div class="content-body">
+                <section class="users-list-wrapper">
+                    <div class="users-list-table">
+                        <div class="card">
+                            <div class="card-body">
+                               
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.ProfilePhoto)
+                                                </th>
+                                                <th class="col-2">
+                                                    @Html.DisplayNameFor(model => model.DoctorName)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.DoctorEmail)
+                                                </th>
+
+                                                @*<th>
+            Category
+        </th>*@
+
+                                                <th>
+                                                    Online Status
+                                                </th>
+                                                <th>
+                                                    Active Status
+                                                </th>
+                                                <th>
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+
+                                                <td>
+                                                    <img src="~/Images/@item.ProfilePhoto" class="round" style="width:100px; height:100px;" />
+                                                </td>
+                                                <td class="col-2">
+                                                    @Html.DisplayFor(modelItem => item.DoctorName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DoctorEmail)
+                                                </td>
+                                                @*<td>
+            @Html.DisplayFor(modelItem => item.Categories.CategoryTitle)
+        </td>*@
+
+                                                <td>
+                                                    @*  @Html.DisplayFor(modelItem => item.Status)*@
+                                                    @if (item.OnlineStatus == true)
+                                                    {<div style="color:green">Active</div> }
+                                                    else
+                                                    { <div style="color:red">Deactive</div>}
+                                                </td>
+                                                <td>
+                                                    @*  @Html.DisplayFor(modelItem => item.Status)*@
+                                                    @if (item.Status == true)
+                                                    {<div style="color:green">Active</div> }
+                                                    else
+                                                    { <div style="color:red">Deactive</div>}
+                                                </td>
+                                        
+
+                                                <td class=" mt-3">
+                                                    <div class="fonticon-container">
+                                                        <div class="fonticon-wrap" style="margin-bottom: 0px;">
+                                                            <i onclick="@("window.location.href='" + @Url.Action("Create", "Doctor", new {id = item.DoctorId}) + "'");" class="bx bx-edit"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="fonticon-container">
+                                                        <div class="fonticon-wrap" style="margin-bottom: 0px;">
+                                                            <i onclick="@("window.location.href='" + @Url.Action("Create", "DoctorTimeTable", new {id = item.DoctorId}) + "'");" class="bx bx-time"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    @if (!item.OnlineStatus)
+                                                    {
+                                                        <div class="fonticon-container">
+                                                            <div class="fonticon-wrap" style="margin-bottom: 0px;">
+                                                                <i onclick="ChangeDoctorOnlineStatus(@item.DoctorId)" class="bx bx-power-off"></i>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fonticon-container">
+                                                            <div class="fonticon-wrap" style="margin-bottom: 0px;">
+                                                                <i onclick="ChangeDoctorOnlineStatus(@item.DoctorId)" class="bx bx-power-off"></i>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                    @if (!item.Status)
+                                                    {
+                                                        <div class="fonticon-container">
+                                                            <div class="fonticon-wrap" style="margin-bottom: 0px;">
+                                                                <i onclick="ChangeDoctorStatus(@item.DoctorId)" class="bx bx-trash"></i>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fonticon-container">
+                                                            <div class="fonticon-wrap" style="margin-bottom: 0px;">
+                                                                <i onclick="ChangeDoctorStatus(@item.DoctorId)" class="bx bx-trash"></i>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                </td>
+
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+@*</body>*@
+
+<script>
+    function ChangeDoctorStatus(id) {
+        $.ajax({
+            type: "Get",
+            url: '/Doctor/ChangeDoctorStatus',
+            data: { id: id },
+            success: function (json) {
+                if (json == "Success") {
+                    //swal("Updated!", "Customer Status Updated!", "success");
+                    window.location.reload();
+                }
+
+
+                // swal("Updated!", "Customer Status Updated!", "success");
+                //window.location.reload();
+            },
+            error: function (xhr) {
+                //  swal("Error", "Please Try again later!", "error");
+            }
+        });
+    }
+
+    function ChangeDoctorOnlineStatus(id) {
+        $.ajax({
+            type: "Get",
+            url: '/Doctor/ChangeDoctorOnlineStatus',
+            data: { id: id },
+            success: function (json) {
+                if (json == "Success") {
+                    //swal("Updated!", "Customer Status Updated!", "success");
+                    window.location.reload();
+                }
+
+
+                // swal("Updated!", "Customer Status Updated!", "success");
+                //window.location.reload();
+            },
+            error: function (xhr) {
+                //  swal("Error", "Please Try again later!", "error");
+            }
+        });
+    }
+
+</script>

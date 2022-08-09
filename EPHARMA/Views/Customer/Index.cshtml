@@ -1,0 +1,97 @@
+﻿@model IEnumerable<EPHARMA.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="rtl">
+<body class="horizontal-layout horizontal-menu navbar-static 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content">
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <h4 class="card-title">Customer</h4>
+                <a asp-action="Create">
+                    <button class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:650px">
+                        <i class="bx bx-plus"></i>&nbsp; Add new Customer
+                    </button>
+                </a>
+            </div>
+            <div class="content-body">
+                <section class="users-list-wrapper">
+                    <div class="users-list-table">
+                        <div class="card">
+                            <div class="card-body">
+                                @*<div class="card-header">
+                                        <h4 class="card-title">City Details</h4>
+                                        <a asp-action="Create">
+                                            <button id="addRow" class="btn btn-primary mb-2 d-flex align-items-center">
+                                                <i class="bx bx-plus"></i>&nbsp; Add new City
+                                            </button>
+                                        </a>
+                                    </div>*@
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.CustomerName)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.CustomerEmail)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Gender)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.CustomerAddress)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.CityId)
+                                                </th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CustomerName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CustomerEmail)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Gender)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CustomerAddress)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CityId)
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="Create" asp-route-id="@item.CustomerId"><i class='bx bxs-eyedropper' style="height:25px;width:25px;color:#7367f0"></i></a> |
+                                                        <a href="#" onclick="DeleteRecord(@item.CustomerId, '/Customer/Delete')"><i class="Danger bx bx-trash-alt" style="height:25px;width:25px;color:#ea5455"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

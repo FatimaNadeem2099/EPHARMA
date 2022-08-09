@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EPHARMA.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="content-header row">
+    <h4 class="card-title">Category Details</h4>
+    <a asp-action="Create">
+        <button id="addRow" class="btn btn-primary mb-2 d-flex align-items-center" style="margin-left:700px">
+            <i class="bx bx-plus"></i>&nbsp; Add new Category
+        </button>
+    </a>
+</div>
+<div class="card-content">
+    <div class="content-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body card-dashboard">
+                        <div class="table-responsive">
+                            <table class="table zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CategoryTitle)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CategoryType)
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CategoryTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CategoryType)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Create" asp-route-id="@item.CategoryId"><i class='bx bxs-eyedropper' style="height:25px;width:25px;color:#7367f0"></i></a> |
+                                            <a href="#" onclick="DeleteRecord(@item.CategoryId, '/Category/Delete')"><i class="Danger bx bx-trash-alt" style="height:25px;width:25px;color:#ea5455"></i></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

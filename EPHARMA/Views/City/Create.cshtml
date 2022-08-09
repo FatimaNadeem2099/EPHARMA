@@ -1,0 +1,50 @@
+﻿@model EPHARMA.Models.City
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section id="multiple-column-form">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">@(Model.CityId ==0 ? "Create City" : "Edit City")</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="CityId" />
+                        <input type="hidden" asp-for="Date" />
+                        <div class="row clearfix">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="CityName" class="control-label"></label>
+                                    <input asp-for="CityName" class="form-control" />
+                                    <span asp-validation-for="CityName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="CountryId" class="control-label"></label>
+                                    <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId">
+                                        <option value="">Select Country</option>
+                                    </select>
+                                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button id="SubmitButton" type="submit" class="btn btn-primary btn-round">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

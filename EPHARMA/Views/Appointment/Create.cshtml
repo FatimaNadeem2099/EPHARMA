@@ -1,0 +1,84 @@
+﻿@model EPHARMA.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section id="multiple-column-form">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">@(Model.AppointmentId ==0 ? "Create Appointment" : "Edit Appointment")</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <input type="hidden" asp-for="AppointmentId" />
+                        <input type="hidden" asp-for="Date" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row clearfix">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="AppointmentCode" class="control-label"></label>
+                                    <input asp-for="AppointmentCode" class="form-control" />
+                                    <span asp-validation-for="AppointmentCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Customers.CustomerName" class="control-label"></label>
+                                    <input asp-for="Customers.CustomerName" class="form-control" />
+                                    <span asp-validation-for="Customers.CustomerName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Doctors.DoctorName" class="control-label"></label>
+                                    <input asp-for="Doctors.DoctorName" class="form-control" />
+                                    <span asp-validation-for="Doctors.DoctorName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="AppointmentStatus" class="control-label"></label>
+                                    <input asp-for="AppointmentStatus" class="form-control" />
+                                    <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="StartTime" class="control-label"></label>
+                                    <input asp-for="StartTime" class="form-control" />
+                                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="EndTime" class="control-label"></label>
+                                    <input asp-for="EndTime" class="form-control" />
+                                    <span asp-validation-for="EndTime" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="NumberOfSlots" class="control-label"></label>
+                                    <input asp-for="NumberOfSlots" class="form-control" />
+                                    <span asp-validation-for="NumberOfSlots" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <button id="SubmitButton" type="submit" class="btn btn-primary btn-round">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

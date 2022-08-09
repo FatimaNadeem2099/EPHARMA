@@ -1,0 +1,247 @@
+﻿@model EPHARMA.ViewModel.MedicineViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@section Css {
+    @{
+        <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/forms/select/select2.min.css">
+    }
+}
+<form asp-action="Create" enctype="multipart/form-data" class="form form-vertical">
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row" style="margin:1%;">
+                            <h2 class="card-title"> Pharmacy</h2>  &nbsp;&nbsp; <span class="text-danger" asp-validation-for="Medicines.PharmacyId"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @*<div class="col-md-6">
+            <select id="dates-field2" class="form-control" asp-for="CategoryIds" multiple="multiple" asp-items="ViewBag.AllCategories" placeholder="testing">
+                <option value="" disabled></option>
+            </select>
+        </div>*@
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Medicines.PharmacyId" class="control-label"></label>
+                                <select asp-for="Medicines.PharmacyId" required class="form-control" asp-items="ViewBag.PharmacyId">
+                                    <option value="">Select Pharmacy</option>
+                                </select>
+                                <span asp-validation-for="Medicines.PharmacyId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">@(Model.Medicines.MedicineId ==0 ? "Create Medicine" : "Edit Medicine")</h2>
+                    </div>
+                    <div class="card-body">
+                        <input type="hidden" asp-for="Medicines.MedicineId" />
+                        <input type="hidden" asp-for="Medicines.MedicineImage" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <fieldset class="form-group">
+
+                                            <label asp-for="Medicines.MedicineImage">Medicine Image<br /> <small>please upload an image with height and width greater than 100</small> </label>
+                                            <div class="custom-file">
+                                                <input name="MedicineImage" type="file" onchange="document.getElementById('showLogoImageId').src = window.URL.createObjectURL(this.files[0]);" class="custom-file-input" id="inputGroupFile01" />
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-sm-6" style="text-align:center">
+                                        @if (Model.Medicines.MedicineImage == null)
+                                        {
+
+                                            <img src="~/Images/index.png" id="showLogoImageId" class="align-content-center" style="width:250px; height:200px;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Images/@Model.Medicines.MedicineImage" id="showCoverImageId" class="align-content-center" style="width:200px; height:200px;" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.MedicineName" class="control-label"></label>
+                                    <input asp-for="Medicines.MedicineName" required class="form-control" />
+                                    <span asp-validation-for="Medicines.MedicineName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.MedicineBrand" class="control-label"></label>
+                                    <input asp-for="Medicines.MedicineBrand" required class="form-control" />
+                                    <span asp-validation-for="Medicines.MedicineBrand" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.PackageSize" class="control-label"></label>
+                                    <input asp-for="Medicines.PackageSize" required class="form-control" />
+                                    <span asp-validation-for="Medicines.PackageSize" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.Quantity" class="control-label"></label>
+                                    <input asp-for="Medicines.Quantity" required class="form-control" />
+                                    <span asp-validation-for="Medicines.Quantity" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.MedicinePrice" class="control-label"></label>
+                                    <input asp-for="Medicines.MedicinePrice" required class="form-control" />
+                                    <span asp-validation-for="Medicines.MedicinePrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.MedicineType" class="control-label"></label>
+                                    <select asp-for="Medicines.MedicineType" class="form-control">
+
+                                        <option value="prescriptiondrug">
+                                            Prescription Drug
+                                        </option>
+                                        <option value="otcdrug">
+                                            Over the Counter Drug
+                                        </option>
+
+                                    </select>
+                                    <span asp-validation-for="Medicines.MedicineDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.KeyBenefits" class="control-label"></label>
+                                    <textarea asp-for="Medicines.KeyBenefits" required class="form-control"></textarea>
+                                    <span asp-validation-for="Medicines.KeyBenefits" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.Precautions" class="control-label"></label>
+                                    <textarea asp-for="Medicines.Precautions" required class="form-control"></textarea>
+                                    <span asp-validation-for="Medicines.Precautions" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.MedicineIngredients" class="control-label"></label>
+                                    <textarea asp-for="Medicines.MedicineIngredients" required class="form-control"></textarea>
+                                    <span asp-validation-for="Medicines.MedicineIngredients" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.MedicineDescription" class="control-label"></label>
+                                    <textarea asp-for="Medicines.MedicineDescription" required class="form-control"></textarea>
+                                    <span asp-validation-for="Medicines.MedicineDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Medicines.Storage" class="control-label"></label>
+                                    <textarea asp-for="Medicines.Storage" required class="form-control"></textarea>
+                                    <span asp-validation-for="Medicines.Storage" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row" style="margin:1%;">
+                            <h2 class="card-title"> Medicine Category</h2>  &nbsp;&nbsp; <span class="text-danger" asp-validation-for="CategoryIds"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @*<div class="col-md-6">
+                                <select id="dates-field2" class="form-control" asp-for="CategoryIds" multiple="multiple" asp-items="ViewBag.AllCategories" placeholder="testing">
+                                    <option value="" disabled></option>
+                                </select>
+                            </div>*@
+
+                        <div class="col-md-12">
+                            <select id="dates-f2" required class="CustomSelect2 form-control" asp-for="CategoryIds" multiple="multiple" asp-items="ViewBag.AllCategories" placeholder="testing">
+                                <option value="" disabled></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="col-sm-12">
+        <button id="SubmitButton" type="submit" class="btn btn-primary btn-round">Submit</button>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+
+    }
+    <script src="~/assets/js/easySelect.js"></script>
+    <script src="~/app-assets/js/scripts/forms/select/form-select2.js"></script>
+    <script src="~/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".CustomSelect2").select2({
+                placeholder: "Select Medicine Categories"
+            });
+        })
+    </script>
+    @*<script>
+    $(document).ready(function () {
+        $(".CustomSelect2").select2({
+            placeholder: "Select Medicine Categories"
+        });
+    })
+    $("#dates-field2").easySelect({
+        selectAllText: 'all...',
+        filterText: 'search',
+        caseSensitive: true,
+        //buttons: false,
+        //search: false,
+        placeholder: "Choose Medicine Categories",
+        placeholderColor: "#524781",
+        selectColor: "#524781",
+        //itemTitle: " selected",
+        //showEachItem: true,
+        width: "100%",
+        dropdownMaxHeight: "450px",
+    });
+
+    </script>*@
+
+}
